@@ -78,3 +78,38 @@ func (j *JournalFile) StartAt() time.Time {
 func (j *JournalFile) Open() (*os.File, error) {
 	return os.Open(j.FullPath())
 }
+
+type Scanner struct {
+	sc   bufio.Scanner
+	file *os.File
+}
+
+func (j *JournalFile) OpenScanner() (*JournalScanner, error) {
+	file, err := j.Open()
+	if err != nil {
+		return nil, err
+	}
+
+	sc := bufio.NewScanner(file)
+
+	return &JournalScanner{
+		sc:   sc,
+		file: file,
+	}, nil
+}
+
+func (js *Scanner) Scan() bool {
+	return js.sc.Scan()
+}
+
+func (js *Scanner) Text() string {
+	return js.sc.Text()
+}
+
+func (js *Scanner) Err() error {
+	return js.sc.Err()
+}
+
+func (js *Scanner) Close() {
+	js.file.Close()
+}
