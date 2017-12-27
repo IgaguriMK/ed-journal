@@ -1,6 +1,7 @@
 package journal
 
 import (
+	"bufio"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -80,11 +81,11 @@ func (j *JournalFile) Open() (*os.File, error) {
 }
 
 type Scanner struct {
-	sc   bufio.Scanner
+	sc   *bufio.Scanner
 	file *os.File
 }
 
-func (j *JournalFile) OpenScanner() (*JournalScanner, error) {
+func (j *JournalFile) OpenScanner() (*Scanner, error) {
 	file, err := j.Open()
 	if err != nil {
 		return nil, err
@@ -92,7 +93,7 @@ func (j *JournalFile) OpenScanner() (*JournalScanner, error) {
 
 	sc := bufio.NewScanner(file)
 
-	return &JournalScanner{
+	return &Scanner{
 		sc:   sc,
 		file: file,
 	}, nil

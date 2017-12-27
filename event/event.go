@@ -15,7 +15,12 @@ type Event interface {
 
 const InvalidEvent = "!!INVALID!!"
 
+// DEPRECATED
 func ParseEvent(jsonStr string) (Event, error) {
+	return Parse(jsonStr)
+}
+
+func Parse(jsonStr string) (Event, error) {
 	jsonBytes := []byte(jsonStr)
 
 	eventType := struct {
@@ -97,6 +102,10 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 		return e, err
 	case "DatalinkScan":
 		var e DatalinkScan
+		err := json.Unmarshal(bytes, &e)
+		return e, err
+	case "DatalinkVoucher":
+		var e DatalinkVoucher
 		err := json.Unmarshal(bytes, &e)
 		return e, err
 	case "DataScanned":
