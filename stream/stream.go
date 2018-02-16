@@ -1,8 +1,6 @@
 package stream
 
 import (
-	"encoding/json"
-	"io"
 	"log"
 
 	"github.com/pkg/errors"
@@ -26,26 +24,26 @@ func JournalStream() (chan event.Event, error) {
 
 	go func() {
 		for _, jf := range jfs {
-			f, err := jf.Open()
+			sc, err := jf.OpenScanner()
 			if err != nil {
 				log.Fatal("Can't open file:", err)
 			}
 
-			dec := json.NewDecoder(f)
-
-			for {
-				var e event.Event
-				err = dec.Decode(&e)
-				if err == io.EOF {
-					break
-				}
+			for sc.Scan() {
+				e, err := event.Parse(sc.Text())
 				if err != nil {
-					log.Fatal("JSON decode error:", err)
+					switch err := errors.Cause(err).(type) {
+					case *event.UnknownEventType:
+						log.Println("Unknown event detected:", err)
+						continue
+					default:
+						log.Fatal("JSON decode error:", err)
+					}
 				}
 				ch <- e
 			}
 
-			f.Close()
+			sc.Close()
 		}
 
 		close(ch)
