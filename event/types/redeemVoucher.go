@@ -12,9 +12,10 @@ func init() {
 }
 
 type RedeemVoucher struct {
-	Amount   int64  `json:"Amount"`
-	Faction  string `json:"Faction"`
-	Factions []struct {
+	Amount           int64   `json:"Amount"`
+	BrokerPercentage float64 `json:"BrokerPercentage"`
+	Faction          string  `json:"Faction"`
+	Factions         []struct {
 		Amount  int64  `json:"Amount"`
 		Faction string `json:"Faction"`
 	} `json:"Factions"`
