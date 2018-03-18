@@ -16,6 +16,7 @@ type EngineerApply struct {
 	Engineer  string    `json:"Engineer"`
 	Level     int64     `json:"Level"`
 	Event     string    `json:"event"`
+	Override  string    `json:"Override"`
 	Timestamp time.Time `json:"timestamp"`
 }
 
