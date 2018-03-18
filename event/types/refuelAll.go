@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("RefuelAll", func() event.Event {
+		return new(RefuelAll)
+	})
+}
 
 type RefuelAll struct {
 	Amount    float64   `json:"Amount"`

@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Rank", func() event.Event {
+		return new(Rank)
+	})
+}
 
 type Rank struct {
 	Cqc        int64     `json:"CQC"`

@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("ReceiveText", func() event.Event {
+		return new(ReceiveText)
+	})
+}
 
 type ReceiveText struct {
 	Channel          string    `json:"Channel"`

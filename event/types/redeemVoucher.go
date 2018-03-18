@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("RedeemVoucher", func() event.Event {
+		return new(RedeemVoucher)
+	})
+}
 
 type RedeemVoucher struct {
 	Amount   int64  `json:"Amount"`
