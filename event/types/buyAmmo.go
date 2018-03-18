@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("BuyAmmo", func() event.Event {
+		return new(BuyAmmo)
+	})
+}
 
 type BuyAmmo struct {
 	Cost      int64     `json:"Cost"`

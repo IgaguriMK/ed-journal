@@ -3,7 +3,6 @@ package event
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/pkg/errors"
@@ -66,25 +65,9 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 		return e, err
 	}
 
-	log.Println("[WARNING] Old parse style of ", eventType)
+	//log.Println("[WARNING] Old parse style of ", eventType)
 
 	switch eventType {
-	case "Bounty":
-		var e Bounty
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "BuyAmmo":
-		var e BuyAmmo
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "BuyDrones":
-		var e BuyDrones
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "BuyExplorationData":
-		var e BuyExplorationData
-		err := json.Unmarshal(bytes, &e)
-		return e, err
 	case "BuyTradeData":
 		var e BuyTradeData
 		err := json.Unmarshal(bytes, &e)

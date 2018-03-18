@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	event.RegisterEvent("AfmuRepairs", func() Event {
+	event.RegisterEvent("AfmuRepairs", func() event.Event {
 		return new(AfmuRepairs)
 	})
 }

@@ -1,10 +1,12 @@
 package types
 
-import "time"
-import "github.com/IgaguriMK/ed-journal/event"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
 
 func init() {
-	event.RegisterEvent("ApproachSettlement", func() Event {
+	event.RegisterEvent("ApproachSettlement", func() event.Event {
 		return new(ApproachSettlement)
 	})
 }
