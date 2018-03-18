@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Docked", func() event.Event {
+		return new(Docked)
+	})
+}
 
 type Docked struct {
 	DistFromStarLS             float64   `json:"DistFromStarLS"`

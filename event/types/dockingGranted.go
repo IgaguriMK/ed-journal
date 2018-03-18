@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("DockingGranted", func() event.Event {
+		return new(DockingGranted)
+	})
+}
 
 type DockingGranted struct {
 	LandingPad  int64     `json:"LandingPad"`

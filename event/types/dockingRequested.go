@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("DockingRequested", func() event.Event {
+		return new(DockingRequested)
+	})
+}
 
 type DockingRequested struct {
 	StationName string    `json:"StationName"`

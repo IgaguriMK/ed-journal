@@ -68,34 +68,6 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 	//log.Println("[WARNING] Old parse style of ", eventType)
 
 	switch eventType {
-	case "Died":
-		var e Died
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Docked":
-		var e Docked
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "DockingCancelled":
-		var e DockingCancelled
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "DockingDenied":
-		var e DockingDenied
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "DockingGranted":
-		var e DockingGranted
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "DockingRequested":
-		var e DockingRequested
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "DockSRV":
-		var e DockSRV
-		err := json.Unmarshal(bytes, &e)
-		return e, err
 	case "EjectCargo":
 		var e EjectCargo
 		err := json.Unmarshal(bytes, &e)
@@ -134,10 +106,6 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 		return e, err
 	case "Friends":
 		var e Friends
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "FSDJump":
-		var e FSDJump
 		err := json.Unmarshal(bytes, &e)
 		return e, err
 	case "FuelScoop":

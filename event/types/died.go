@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Died", func() event.Event {
+		return new(Died)
+	})
+}
 
 type Died struct {
 	KillerName          string    `json:"KillerName"`
