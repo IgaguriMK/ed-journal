@@ -13,8 +13,13 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/IgaguriMK/ed-journal/event"
+	_ "github.com/IgaguriMK/ed-journal/event/types"
 	jfile "github.com/IgaguriMK/ed-journal/file"
 )
+
+const MaxFail = 1000000
+
+var failCount = 0
 
 func main() {
 	logfile, err := os.Create("error.log")
@@ -38,6 +43,20 @@ func main() {
 		log.Fatal("Can't search journal files: ", err)
 	}
 
+	if err := os.RemoveAll("./_out"); err != nil {
+		log.Fatal("Can't remove dir: ", err)
+	}
+	if err := os.MkdirAll("./_out/unknown", 0644); err != nil {
+		log.Fatal("Can't create dir: ", err)
+	}
+	if err := os.MkdirAll("./_out/mismatch", 0644); err != nil {
+		log.Fatal("Can't create dir: ", err)
+	}
+
+	totalCount := 0
+	unknownCount := 0
+	mismatchCount := 0
+
 	for _, jf := range jfs {
 		sc, err := jf.OpenScanner()
 		if err != nil {
@@ -45,14 +64,17 @@ func main() {
 		}
 
 		for sc.Scan() {
-			str := sc.Text()
+			totalCount++
 
+			str := sc.Text()
 			e, err := event.Parse(str)
 
 			if err != nil {
 				switch err := errors.Cause(err).(type) {
 				case *event.UnknownEventType:
-					saveFailRecord("0.unknown."+err.Type+".", ".json", err.Raw)
+					saveFailRecord("unknown/"+err.Type+".", ".json", err.Raw)
+					unknownCount++
+					failed()
 				default:
 					log.Fatal("Parse error:", err)
 				}
@@ -60,10 +82,25 @@ func main() {
 				continue
 			}
 
-			checkLackOfField(str, e)
+			ok := checkLackOfField(str, e)
+			if !ok {
+				mismatchCount++
+				failed()
+			}
 		}
 
 		sc.Close()
+	}
+
+	fmt.Printf("Unknown:    %d (%.1f %%)\n", unknownCount, 100.0*float64(unknownCount)/float64(totalCount))
+	fmt.Printf("Mismatches:    %d (%.1f %%)\n", mismatchCount, 100.0*float64(mismatchCount)/float64(totalCount))
+}
+
+func failed() {
+	failCount++
+
+	if failCount >= MaxFail {
+		log.Fatal("Too many fail.")
 	}
 }
 
@@ -89,8 +126,32 @@ func checkLackOfField(eventStr string, e event.Event) bool {
 	wantLines := strings.Split(eventStr, "\n")
 	getLines := strings.Split(actualStr, "\n")
 
-	if len(wantLines) != len(getLines) {
-		saveFailRecord("1.mismatch."+e.GetEvent()+".", ".txt", eventStr+"\n"+actualStr)
+	getMap := make(map[string]bool)
+	for _, g := range getLines {
+		g = strings.Trim(g, "\t")
+		getMap[g] = true
+	}
+
+	failed := false
+	lackedLines := make([]string, 0)
+	for _, w := range wantLines {
+		w = strings.Trim(w, "\t")
+		if !getMap[w] {
+			failed = true
+			lackedLines = append(lackedLines, w)
+		}
+	}
+
+	if failed {
+		saveFailRecord(
+			"mismatch/"+e.GetEvent()+".", ".got.txt",
+			fmt.Sprintf(
+				"GET:\n%s\nWANT:%s\nNEED:\n%s\n",
+				actualStr,
+				eventStr,
+				strings.Join(lackedLines, "\n"),
+			),
+		)
 		return false
 	}
 
