@@ -12,6 +12,7 @@ func init() {
 }
 
 type CommitCrime struct {
+	Bounty    int64     `json:"Bounty"`
 	CrimeType string    `json:"CrimeType"`
 	Faction   string    `json:"Faction"`
 	Fine      int64     `json:"Fine"`
