@@ -1,14 +1,12 @@
 BASEPKG=github.com/IgaguriMK/ed-journal
 
-.PHONY: all
-all: build test
+.PHONY: check
+check: build testrun
 
 .PHONY: build
 build:
-	go build $(BASEPKG)/event
-	go build $(BASEPKG)/file
+	go build checkjournals.go
 
-.PHONY: test
-test:
-	go test $(BASEPKG)/event
-	go test $(BASEPKG)/file
+.PHONY: testrun
+testrun:
+	./checkjournals
