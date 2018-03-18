@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Liftoff", func() event.Event {
+		return new(Liftoff)
+	})
+}
 
 type Liftoff struct {
 	Latitude         float64   `json:"Latitude"`

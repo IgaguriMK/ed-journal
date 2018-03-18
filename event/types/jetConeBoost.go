@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("JetConeBoost", func() event.Event {
+		return new(JetConeBoost)
+	})
+}
 
 type JetConeBoost struct {
 	BoostValue float64   `json:"BoostValue"`

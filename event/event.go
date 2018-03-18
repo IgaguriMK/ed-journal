@@ -68,34 +68,6 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 	//log.Println("[WARNING] Old parse style of ", eventType)
 
 	switch eventType {
-	case "Interdicted":
-		var e Interdicted
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "JetConeBoost":
-		var e JetConeBoost
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "LaunchSRV":
-		var e LaunchSRV
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Liftoff":
-		var e Liftoff
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "LoadGame":
-		var e LoadGame
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Loadout":
-		var e Loadout
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Location":
-		var e Location
-		err := json.Unmarshal(bytes, &e)
-		return e, err
 	case "MarketBuy":
 		var e MarketBuy
 		err := json.Unmarshal(bytes, &e)
@@ -170,10 +142,6 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 		return e, err
 	case "Music":
 		var e Music
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "NavBeaconScan":
-		var e NavBeaconScan
 		err := json.Unmarshal(bytes, &e)
 		return e, err
 	case "Passengers":

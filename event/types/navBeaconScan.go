@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("NavBeaconScan", func() event.Event {
+		return new(NavBeaconScan)
+	})
+}
 
 type NavBeaconScan struct {
 	NumBodies int64     `json:"NumBodies"`

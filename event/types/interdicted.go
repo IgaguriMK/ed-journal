@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Interdicted", func() event.Event {
+		return new(Interdicted)
+	})
+}
 
 type Interdicted struct {
 	Faction     string    `json:"Faction"`
