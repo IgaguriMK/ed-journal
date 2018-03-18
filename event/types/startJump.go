@@ -12,11 +12,12 @@ func init() {
 }
 
 type StartJump struct {
-	JumpType   string    `json:"JumpType"`
-	StarClass  string    `json:"StarClass"`
-	StarSystem string    `json:"StarSystem"`
-	Event      string    `json:"event"`
-	Timestamp  time.Time `json:"timestamp"`
+	JumpType      string    `json:"JumpType"`
+	StarClass     string    `json:"StarClass"`
+	StarSystem    string    `json:"StarSystem"`
+	SystemAddress int64     `json:"SystemAddress"`
+	Event         string    `json:"event"`
+	Timestamp     time.Time `json:"timestamp"`
 }
 
 func (e StartJump) GetEvent() string {
