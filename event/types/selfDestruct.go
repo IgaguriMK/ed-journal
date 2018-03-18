@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("SelfDestruct", func() event.Event {
+		return new(SelfDestruct)
+	})
+}
 
 type SelfDestruct struct {
 	Event     string    `json:"event"`

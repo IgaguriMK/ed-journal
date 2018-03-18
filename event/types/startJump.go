@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("StartJump", func() event.Event {
+		return new(StartJump)
+	})
+}
 
 type StartJump struct {
 	JumpType   string    `json:"JumpType"`

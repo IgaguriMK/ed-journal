@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Scan", func() event.Event {
+		return new(Scan)
+	})
+}
 
 type Scan struct {
 	AbsoluteMagnitude     float64 `json:"AbsoluteMagnitude"`

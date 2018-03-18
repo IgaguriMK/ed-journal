@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("ShieldState", func() event.Event {
+		return new(ShieldState)
+	})
+}
 
 type ShieldState struct {
 	ShieldsUp bool      `json:"ShieldsUp"`

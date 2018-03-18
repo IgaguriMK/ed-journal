@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("SupercruiseEntry", func() event.Event {
+		return new(SupercruiseEntry)
+	})
+}
 
 type SupercruiseEntry struct {
 	StarSystem string    `json:"StarSystem"`

@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("ShipyardTransfer", func() event.Event {
+		return new(ShipyardTransfer)
+	})
+}
 
 type ShipyardTransfer struct {
 	Distance      float64   `json:"Distance"`

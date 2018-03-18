@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("ShipyardNew", func() event.Event {
+		return new(ShipyardNew)
+	})
+}
 
 type ShipyardNew struct {
 	NewShipID int64     `json:"NewShipID"`
