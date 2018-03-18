@@ -16,6 +16,9 @@ type Bounty struct {
 		Faction string `json:"Faction"`
 		Reward  int64  `json:"Reward"`
 	} `json:"Rewards"`
+	Faction          string    `json:"Faction"`
+	FactionLocalised string    `json:"Faction_Localised"`
+	Reward           int64     `json:"Reward"`
 	SharedWithOthers int64     `json:"SharedWithOthers"`
 	Target           string    `json:"Target"`
 	TotalReward      int64     `json:"TotalReward"`
