@@ -144,7 +144,7 @@ func checkLackOfField(eventStr string, e event.Event) bool {
 
 	if failed {
 		saveFailRecord(
-			"mismatch/"+e.GetEvent()+".", ".got.txt",
+			"mismatch/"+e.GetEvent()+".", ".txt",
 			fmt.Sprintf(
 				"GET:\n%s\nWANT:%s\nNEED:\n%s\n",
 				actualStr,
