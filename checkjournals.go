@@ -17,7 +17,7 @@ import (
 	jfile "github.com/IgaguriMK/ed-journal/file"
 )
 
-const MaxFail = 1000000
+const MaxFail = 1000
 
 var failCount = 0
 
