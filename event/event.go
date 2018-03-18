@@ -3,10 +3,26 @@ package event
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/pkg/errors"
 )
+
+var factory map[string]func() Event
+
+func init() {
+	factory = make(map[string]func() Event)
+}
+
+func RegisterEvent(typeName string, newFunc func() Event) {
+	_, found := factory[typeName]
+	if found {
+		panic("Already event type exist: " + typeName)
+	}
+
+	factory[typeName] = newFunc
+}
 
 type Event interface {
 	GetEvent() string
@@ -43,11 +59,16 @@ func Parse(jsonStr string) (Event, error) {
 }
 
 func parseWithType(bytes []byte, eventType string) (Event, error) {
-	switch eventType {
-	case "AfmuRepairs":
-		var e AfmuRepairs
-		err := json.Unmarshal(bytes, &e)
+	f, ok := factory[eventType]
+	if ok {
+		e := f()
+		err := json.Unmarshal(bytes, e)
 		return e, err
+	}
+
+	log.Println("[WARNING] Old parse style of ", eventType)
+
+	switch eventType {
 	case "ApproachSettlement":
 		var e ApproachSettlement
 		err := json.Unmarshal(bytes, &e)

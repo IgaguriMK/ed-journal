@@ -1,6 +1,16 @@
-package event
+package types
 
-import "time"
+import (
+	"time"
+
+	"github.com/IgaguriMK/ed-journal/event"
+)
+
+func init() {
+	event.RegisterEvent("AfmuRepairs", func() Event {
+		return new(AfmuRepairs)
+	})
+}
 
 type AfmuRepairs struct {
 	FullyRepaired   bool      `json:"FullyRepaired"`
