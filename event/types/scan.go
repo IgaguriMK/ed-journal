@@ -19,24 +19,27 @@ type Scan struct {
 		Name    string  `json:"Name"`
 		Percent float64 `json:"Percent"`
 	} `json:"AtmosphereComposition"`
-	AtmosphereType        string  `json:"AtmosphereType"`
-	AxialTilt             float64 `json:"AxialTilt"`
-	BodyName              string  `json:"BodyName"`
-	DistanceFromArrivalLS float64 `json:"DistanceFromArrivalLS"`
-	Eccentricity          float64 `json:"Eccentricity"`
-	Landable              bool    `json:"Landable"`
-	Luminosity            string  `json:"Luminosity"`
-	MassEM                float64 `json:"MassEM"`
+	AtmosphereType        string             `json:"AtmosphereType"`
+	AxialTilt             float64            `json:"AxialTilt"`
+	BodyName              string             `json:"BodyName"`
+	BodyID                int64              `json:"BodyID"`
+	Composition           map[string]float64 `json:"Composition"`
+	DistanceFromArrivalLS float64            `json:"DistanceFromArrivalLS"`
+	Eccentricity          float64            `json:"Eccentricity"`
+	Landable              bool               `json:"Landable"`
+	Luminosity            string             `json:"Luminosity"`
+	MassEM                float64            `json:"MassEM"`
 	Materials             []struct {
 		Name    string  `json:"Name"`
 		Percent float64 `json:"Percent"`
 	} `json:"Materials"`
-	OrbitalInclination float64 `json:"OrbitalInclination"`
-	OrbitalPeriod      float64 `json:"OrbitalPeriod"`
-	Periapsis          float64 `json:"Periapsis"`
-	PlanetClass        string  `json:"PlanetClass"`
-	Radius             float64 `json:"Radius"`
-	ReserveLevel       string  `json:"ReserveLevel"`
+	OrbitalInclination float64              `json:"OrbitalInclination"`
+	OrbitalPeriod      float64              `json:"OrbitalPeriod"`
+	Parents            []map[string]float64 `json:"Parents"`
+	Periapsis          float64              `json:"Periapsis"`
+	PlanetClass        string               `json:"PlanetClass"`
+	Radius             float64              `json:"Radius"`
+	ReserveLevel       string               `json:"ReserveLevel"`
 	Rings              []struct {
 		InnerRad  float64 `json:"InnerRad"`
 		MassMT    float64 `json:"MassMT"`
@@ -45,6 +48,7 @@ type Scan struct {
 		RingClass string  `json:"RingClass"`
 	} `json:"Rings"`
 	RotationPeriod     float64   `json:"RotationPeriod"`
+	ScanType           string    `json"ScanType"`
 	SemiMajorAxis      float64   `json:"SemiMajorAxis"`
 	StarType           string    `json:"StarType"`
 	StellarMass        float64   `json:"StellarMass"`
