@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Passengers", func() event.Event {
+		return new(Passengers)
+	})
+}
 
 type Passengers struct {
 	Manifest []struct {

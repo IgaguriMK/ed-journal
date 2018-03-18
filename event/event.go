@@ -68,22 +68,6 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 	//log.Println("[WARNING] Old parse style of ", eventType)
 
 	switch eventType {
-	case "Passengers":
-		var e Passengers
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "PayFines":
-		var e PayFines
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Progress":
-		var e Progress
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Promotion":
-		var e Promotion
-		err := json.Unmarshal(bytes, &e)
-		return e, err
 	case "Rank":
 		var e Rank
 		err := json.Unmarshal(bytes, &e)
