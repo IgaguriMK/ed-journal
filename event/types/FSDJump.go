@@ -35,6 +35,7 @@ type FSDJump struct {
 	Population                int64     `json:"Population"`
 	StarPos                   []float64 `json:"StarPos"`
 	StarSystem                string    `json:"StarSystem"`
+	SystemAddress             int64     `json:"SystemAddress"`
 	SystemAllegiance          string    `json:"SystemAllegiance"`
 	SystemEconomy             string    `json:"SystemEconomy"`
 	SystemEconomyLocalised    string    `json:"SystemEconomy_Localised"`
