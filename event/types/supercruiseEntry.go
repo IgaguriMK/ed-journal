@@ -12,9 +12,10 @@ func init() {
 }
 
 type SupercruiseEntry struct {
-	StarSystem string    `json:"StarSystem"`
-	Event      string    `json:"event"`
-	Timestamp  time.Time `json:"timestamp"`
+	StarSystem    string    `json:"StarSystem"`
+	SystemAddress int64     `json:"SystemAddress"`
+	Event         string    `json:"event"`
+	Timestamp     time.Time `json:"timestamp"`
 }
 
 func (e SupercruiseEntry) GetEvent() string {

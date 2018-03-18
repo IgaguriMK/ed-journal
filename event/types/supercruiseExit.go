@@ -12,11 +12,13 @@ func init() {
 }
 
 type SupercruiseExit struct {
-	Body       string    `json:"Body"`
-	BodyType   string    `json:"BodyType"`
-	StarSystem string    `json:"StarSystem"`
-	Event      string    `json:"event"`
-	Timestamp  time.Time `json:"timestamp"`
+	Body          string    `json:"Body"`
+	BodyID        int64     `json:"BodyID"`
+	BodyType      string    `json:"BodyType"`
+	StarSystem    string    `json:"StarSystem"`
+	SystemAddress int64     `json:"SystemAddress"`
+	Event         string    `json:"event"`
+	Timestamp     time.Time `json:"timestamp"`
 }
 
 func (e SupercruiseExit) GetEvent() string {
