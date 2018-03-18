@@ -65,41 +65,6 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 		return e, err
 	}
 
-	//log.Println("[WARNING] Old parse style of ", eventType)
-
-	switch eventType {
-	case "Touchdown":
-		var e Touchdown
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Undocked":
-		var e Undocked
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "USSDrop":
-		var e USSDrop
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "WingAdd":
-		var e WingAdd
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "WingInvite":
-		var e WingInvite
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "WingJoin":
-		var e WingJoin
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "WingLeave":
-		var e WingLeave
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-
-		///////////////////////////////////////////////////////////
-	}
-
 	return nil, &UnknownEventType{Raw: string(bytes), Type: eventType}
 }
 

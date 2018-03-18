@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("USSDrop", func() event.Event {
+		return new(USSDrop)
+	})
+}
 
 type USSDrop struct {
 	USSThreat        int64     `json:"USSThreat"`

@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Undocked", func() event.Event {
+		return new(Undocked)
+	})
+}
 
 type Undocked struct {
 	StationName string    `json:"StationName"`

@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("WingInvite", func() event.Event {
+		return new(WingInvite)
+	})
+}
 
 type WingInvite struct {
 	Name      string    `json:"Name"`
