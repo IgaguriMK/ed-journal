@@ -1,6 +1,13 @@
-package event
+package types
 
 import "time"
+import "github.com/IgaguriMK/ed-journal/event"
+
+func init() {
+	event.RegisterEvent("ApproachSettlement", func() Event {
+		return new(ApproachSettlement)
+	})
+}
 
 type ApproachSettlement struct {
 	Name      string    `json:"Name"`
