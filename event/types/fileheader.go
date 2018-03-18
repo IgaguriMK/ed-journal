@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Fileheader", func() event.Event {
+		return new(Fileheader)
+	})
+}
 
 type Fileheader struct {
 	Build       string    `json:"build"`

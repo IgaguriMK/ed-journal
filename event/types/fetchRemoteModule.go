@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("FetchRemoteModule", func() event.Event {
+		return new(FetchRemoteModule)
+	})
+}
 
 type FetchRemoteModule struct {
 	ServerID            int64     `json:"ServerId"`

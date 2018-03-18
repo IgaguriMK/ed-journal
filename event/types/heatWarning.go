@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("HeatWarning", func() event.Event {
+		return new(HeatWarning)
+	})
+}
 
 type HeatWarning struct {
 	Event     string    `json:"event"`

@@ -68,38 +68,6 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 	//log.Println("[WARNING] Old parse style of ", eventType)
 
 	switch eventType {
-	case "FactionKillBond":
-		var e FactionKillBond
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "FetchRemoteModule":
-		var e FetchRemoteModule
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Fileheader":
-		var e Fileheader
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Friends":
-		var e Friends
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "FuelScoop":
-		var e FuelScoop
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "HeatDamage":
-		var e HeatDamage
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "HeatWarning":
-		var e HeatWarning
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "HullDamage":
-		var e HullDamage
-		err := json.Unmarshal(bytes, &e)
-		return e, err
 	case "Interdicted":
 		var e Interdicted
 		err := json.Unmarshal(bytes, &e)

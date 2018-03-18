@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("FactionKillBond", func() event.Event {
+		return new(FactionKillBond)
+	})
+}
 
 type FactionKillBond struct {
 	AwardingFaction          string    `json:"AwardingFaction"`
