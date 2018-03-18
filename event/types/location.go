@@ -13,6 +13,7 @@ func init() {
 
 type Location struct {
 	Body         string `json:"Body"`
+	BodyID       int64  `json:"BodyID"`
 	BodyType     string `json:"BodyType"`
 	Docked       bool   `json:"Docked"`
 	FactionState string `json:"FactionState"`
@@ -38,6 +39,7 @@ type Location struct {
 	StarSystem                string    `json:"StarSystem"`
 	StationName               string    `json:"StationName"`
 	StationType               string    `json:"StationType"`
+	SystemAddress             int64     `json:"SystemAddress"`
 	SystemAllegiance          string    `json:"SystemAllegiance"`
 	SystemEconomy             string    `json:"SystemEconomy"`
 	SystemEconomyLocalised    string    `json:"SystemEconomy_Localised"`
