@@ -68,50 +68,6 @@ func parseWithType(bytes []byte, eventType string) (Event, error) {
 	//log.Println("[WARNING] Old parse style of ", eventType)
 
 	switch eventType {
-	case "BuyTradeData":
-		var e BuyTradeData
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "Cargo":
-		var e Cargo
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "CockpitBreached":
-		var e CockpitBreached
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "CollectCargo":
-		var e CollectCargo
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "CommitCrime":
-		var e CommitCrime
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "CommunityGoal":
-		var e CommunityGoal
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "CommunityGoalJoin":
-		var e CommunityGoalJoin
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "CommunityGoalReward":
-		var e CommunityGoalReward
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "DatalinkScan":
-		var e DatalinkScan
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "DatalinkVoucher":
-		var e DatalinkVoucher
-		err := json.Unmarshal(bytes, &e)
-		return e, err
-	case "DataScanned":
-		var e DataScanned
-		err := json.Unmarshal(bytes, &e)
-		return e, err
 	case "Died":
 		var e Died
 		err := json.Unmarshal(bytes, &e)

@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("CommunityGoalReward", func() event.Event {
+		return new(CommunityGoalReward)
+	})
+}
 
 type CommunityGoalReward struct {
 	Name      string    `json:"Name"`

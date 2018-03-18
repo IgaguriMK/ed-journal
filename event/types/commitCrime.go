@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("CommitCrime", func() event.Event {
+		return new(CommitCrime)
+	})
+}
 
 type CommitCrime struct {
 	CrimeType string    `json:"CrimeType"`

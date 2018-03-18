@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("DatalinkScan", func() event.Event {
+		return new(DatalinkScan)
+	})
+}
 
 type DatalinkScan struct {
 	Message          string    `json:"Message"`
