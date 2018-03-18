@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("EjectCargo", func() event.Event {
+		return new(EjectCargo)
+	})
+}
 
 type EjectCargo struct {
 	Abandoned bool      `json:"Abandoned"`
