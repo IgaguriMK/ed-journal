@@ -13,16 +13,19 @@ func init() {
 
 type Materials struct {
 	Encoded []struct {
-		Count int64  `json:"Count"`
-		Name  string `json:"Name"`
+		Count          int64  `json:"Count"`
+		Name           string `json:"Name"`
+		Name_Localised string `json:"Name_Localised"`
 	} `json:"Encoded"`
 	Manufactured []struct {
-		Count int64  `json:"Count"`
-		Name  string `json:"Name"`
+		Count          int64  `json:"Count"`
+		Name           string `json:"Name"`
+		Name_Localised string `json:"Name_Localised"`
 	} `json:"Manufactured"`
 	Raw []struct {
-		Count int64  `json:"Count"`
-		Name  string `json:"Name"`
+		Count          int64  `json:"Count"`
+		Name           string `json:"Name"`
+		Name_Localised string `json:"Name_Localised"`
 	} `json:"Raw"`
 	Event     string    `json:"event"`
 	Timestamp time.Time `json:"timestamp"`
