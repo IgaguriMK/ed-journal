@@ -128,14 +128,14 @@ func checkLackOfField(eventStr string, e event.Event) bool {
 
 	getMap := make(map[string]bool)
 	for _, g := range getLines {
-		g = strings.Trim(g, "\t")
+		g = strings.TrimSuffix(g, ",")
 		getMap[g] = true
 	}
 
 	failed := false
 	lackedLines := make([]string, 0)
 	for _, w := range wantLines {
-		w = strings.Trim(w, "\t")
+		w = strings.TrimSuffix(w, ",")
 		if !getMap[w] {
 			failed = true
 			lackedLines = append(lackedLines, w)
