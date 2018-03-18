@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Materials", func() event.Event {
+		return new(Materials)
+	})
+}
 
 type Materials struct {
 	Encoded []struct {

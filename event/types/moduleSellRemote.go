@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("ModuleSellRemote", func() event.Event {
+		return new(ModuleSellRemote)
+	})
+}
 
 type ModuleSellRemote struct {
 	SellItem          string    `json:"SellItem"`

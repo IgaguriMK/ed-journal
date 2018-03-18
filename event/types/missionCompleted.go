@@ -1,35 +1,41 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
 
-type MissionAccepted struct {
-	Commodity          string    `json:"Commodity"`
+func init() {
+	event.RegisterEvent("MissionCompleted", func() event.Event {
+		return new(MissionCompleted)
+	})
+}
+
+type MissionCompleted struct {
+	Commodity       string `json:"Commodity"`
+	CommodityReward []struct {
+		Count int64  `json:"Count"`
+		Name  string `json:"Name"`
+	} `json:"CommodityReward"`
 	CommodityLocalised string    `json:"Commodity_Localised"`
 	Count              int64     `json:"Count"`
 	DestinationStation string    `json:"DestinationStation"`
 	DestinationSystem  string    `json:"DestinationSystem"`
-	Expiry             string    `json:"Expiry"`
+	Donation           int64     `json:"Donation"`
 	Faction            string    `json:"Faction"`
-	Influence          string    `json:"Influence"`
 	KillCount          int64     `json:"KillCount"`
-	LocalisedName      string    `json:"LocalisedName"`
 	MissionID          int64     `json:"MissionID"`
 	Name               string    `json:"Name"`
-	PassengerCount     int64     `json:"PassengerCount"`
-	PassengerType      string    `json:"PassengerType"`
-	PassengerVIPs      bool      `json:"PassengerVIPs"`
-	PassengerWanted    bool      `json:"PassengerWanted"`
-	Reputation         string    `json:"Reputation"`
 	Reward             int64     `json:"Reward"`
 	TargetFaction      string    `json:"TargetFaction"`
 	Event              string    `json:"event"`
 	Timestamp          time.Time `json:"timestamp"`
 }
 
-func (e MissionAccepted) GetEvent() string {
+func (e MissionCompleted) GetEvent() string {
 	return e.Event
 }
 
-func (e MissionAccepted) GetTimestamp() time.Time {
+func (e MissionCompleted) GetTimestamp() time.Time {
 	return e.Timestamp
 }

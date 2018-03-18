@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("MissionRedirected", func() event.Event {
+		return new(MissionRedirected)
+	})
+}
 
 type MissionRedirected struct {
 	MissionID             int64     `json:"MissionID"`

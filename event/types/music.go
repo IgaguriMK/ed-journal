@@ -1,6 +1,15 @@
-package event
+package types
 
-import "time"
+import (
+	"github.com/IgaguriMK/ed-journal/event"
+	"time"
+)
+
+func init() {
+	event.RegisterEvent("Music", func() event.Event {
+		return new(Music)
+	})
+}
 
 type Music struct {
 	MusicTrack string    `json:"MusicTrack"`
