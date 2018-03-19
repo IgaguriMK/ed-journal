@@ -12,9 +12,10 @@ func init() {
 }
 
 type PayFines struct {
-	Amount    int64     `json:"Amount"`
-	Event     string    `json:"event"`
-	Timestamp time.Time `json:"timestamp"`
+	Amount           int64     `json:"Amount"`
+	BrokerPercentage float64   `json:"BrokerPercentage"`
+	Event            string    `json:"event"`
+	Timestamp        time.Time `json:"timestamp"`
 }
 
 func (e PayFines) GetEvent() string {
