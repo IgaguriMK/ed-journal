@@ -1,4 +1,4 @@
-package journal
+package file
 
 import (
 	"bufio"
@@ -105,6 +105,10 @@ func (js *Scanner) Scan() bool {
 
 func (js *Scanner) Text() string {
 	return js.sc.Text()
+}
+
+func (js *Scanner) Bytes() []byte {
+	return js.sc.Bytes()
 }
 
 func (js *Scanner) Err() error {

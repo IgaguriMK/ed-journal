@@ -1,0 +1,6 @@
+_out/
+
+*.exe
+*.json
+*.txt
+*.log
