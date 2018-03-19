@@ -72,7 +72,7 @@ func main() {
 			if err != nil {
 				switch err := errors.Cause(err).(type) {
 				case *event.UnknownEventType:
-					saveFailRecord("unknown/"+err.Type+".", ".json", err.Raw)
+					saveFailRecord("unknown/"+err.Type+".", ".json", err.Raw+"\n")
 					unknownCount++
 					failed()
 				default:
