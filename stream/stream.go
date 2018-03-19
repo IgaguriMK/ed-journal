@@ -6,6 +6,7 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/IgaguriMK/ed-journal/event"
+	_ "github.com/IgaguriMK/ed-journal/event/types"
 	"github.com/IgaguriMK/ed-journal/file"
 )
 
