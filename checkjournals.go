@@ -94,6 +94,10 @@ func main() {
 
 	fmt.Printf("Unknown:    %d (%.2f %%)\n", unknownCount, 100.0*float64(unknownCount)/float64(totalCount))
 	fmt.Printf("Mismatches:    %d (%.2f %%)\n", mismatchCount, 100.0*float64(mismatchCount)/float64(totalCount))
+
+	if unknownCount > 0 || mismatchCount > 0 {
+		os.Exit(1)
+	}
 }
 
 func failed() {
