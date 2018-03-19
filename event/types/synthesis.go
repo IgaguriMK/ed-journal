@@ -13,8 +13,9 @@ func init() {
 
 type Synthesis struct {
 	Materials []struct {
-		Count int64  `json:"Count"`
-		Name  string `json:"Name"`
+		Count          int64  `json:"Count"`
+		Name           string `json:"Name"`
+		Name_Localised string `json:"Name_Localised"`
 	} `json:"Materials"`
 	Name      string    `json:"Name"`
 	Event     string    `json:"event"`
