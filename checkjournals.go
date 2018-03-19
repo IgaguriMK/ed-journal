@@ -92,8 +92,8 @@ func main() {
 		sc.Close()
 	}
 
-	fmt.Printf("Unknown:    %d (%.1f %%)\n", unknownCount, 100.0*float64(unknownCount)/float64(totalCount))
-	fmt.Printf("Mismatches:    %d (%.1f %%)\n", mismatchCount, 100.0*float64(mismatchCount)/float64(totalCount))
+	fmt.Printf("Unknown:    %d (%.2f %%)\n", unknownCount, 100.0*float64(unknownCount)/float64(totalCount))
+	fmt.Printf("Mismatches:    %d (%.2f %%)\n", mismatchCount, 100.0*float64(mismatchCount)/float64(totalCount))
 }
 
 func failed() {
