@@ -22,7 +22,20 @@ type MissionCompleted struct {
 	DestinationStation string `json:"DestinationStation"`
 	DestinationSystem  string `json:"DestinationSystem"`
 	//Donation           int64     `json:"Donation"`
-	Faction       string    `json:"Faction"`
+	Faction        string `json:"Faction"`
+	FactionEffects []struct {
+		Effects []struct {
+			Effect          string `json:"Effect"`
+			EffectLocalised string `json:"Effect_Localised"`
+			Trend           string `json:"Trend"`
+		} `json:"Effects"`
+		Faction   string `json:"Faction"`
+		Influence []struct {
+			SystemAddress int64  `json:"SystemAddress"`
+			Trend         string `json:"Trend"`
+		} `json:"Influence"`
+		Reputation string `json:"Reputation"`
+	} `json:"FactionEffects"`
 	KillCount     int64     `json:"KillCount"`
 	MissionID     int64     `json:"MissionID"`
 	Name          string    `json:"Name"`
