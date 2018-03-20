@@ -13,8 +13,9 @@ func init() {
 
 type Cargo struct {
 	Inventory []struct {
-		Count int64  `json:"Count"`
-		Name  string `json:"Name"`
+		Count  int64  `json:"Count"`
+		Name   string `json:"Name"`
+		Stolen int64  `json:"Stolen"`
 	} `json:"Inventory"`
 	Event     string    `json:"event"`
 	Timestamp time.Time `json:"timestamp"`

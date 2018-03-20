@@ -12,11 +12,17 @@ func init() {
 }
 
 type Docked struct {
-	DistFromStarLS             float64   `json:"DistFromStarLS"`
-	FactionState               string    `json:"FactionState"`
-	StarSystem                 string    `json:"StarSystem"`
-	StationAllegiance          string    `json:"StationAllegiance"`
-	StationEconomy             string    `json:"StationEconomy"`
+	DistFromStarLS    float64 `json:"DistFromStarLS"`
+	FactionState      string  `json:"FactionState"`
+	MarketID          int64   `json:"MarketID"`
+	StarSystem        string  `json:"StarSystem"`
+	StationAllegiance string  `json:"StationAllegiance"`
+	StationEconomy    string  `json:"StationEconomy"`
+	StationEconomies  []struct {
+		Name           string  `json:"Name"`
+		Name_Localised string  `json:"Name_Localised"`
+		Proportion     float64 `json:"Proportion"`
+	} ` json:"StationEconomies"`
 	StationEconomyLocalised    string    `json:"StationEconomy_Localised"`
 	StationFaction             string    `json:"StationFaction"`
 	StationGovernment          string    `json:"StationGovernment"`
@@ -25,6 +31,7 @@ type Docked struct {
 	StationServices            []string  `json:"StationServices"`
 	StationState               string    `json:"StationState"`
 	StationType                string    `json:"StationType"`
+	SystemAddress              int64     `json:"SystemAddress"`
 	Event                      string    `json:"event"`
 	Timestamp                  time.Time `json:"timestamp"`
 }
