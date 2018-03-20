@@ -12,6 +12,7 @@ func init() {
 }
 
 type ApproachSettlement struct {
+	MarketID  int64     `json:"MarketID"`
 	Name      string    `json:"Name"`
 	Event     string    `json:"event"`
 	Timestamp time.Time `json:"timestamp"`
