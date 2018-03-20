@@ -12,10 +12,11 @@ func init() {
 }
 
 type ShipyardNew struct {
-	NewShipID int64     `json:"NewShipID"`
-	ShipType  string    `json:"ShipType"`
-	Event     string    `json:"event"`
-	Timestamp time.Time `json:"timestamp"`
+	NewShipID          int64     `json:"NewShipID"`
+	ShipType           string    `json:"ShipType"`
+	ShipType_Localised string    `json:"ShipType_Localised"`
+	Event              string    `json:"event"`
+	Timestamp          time.Time `json:"timestamp"`
 }
 
 func (e ShipyardNew) GetEvent() string {

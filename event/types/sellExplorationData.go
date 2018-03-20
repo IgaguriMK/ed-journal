@@ -12,12 +12,13 @@ func init() {
 }
 
 type SellExplorationData struct {
-	BaseValue  int64     `json:"BaseValue"`
-	Bonus      int64     `json:"Bonus"`
-	Discovered []string  `json:"Discovered"`
-	Systems    []string  `json:"Systems"`
-	Event      string    `json:"event"`
-	Timestamp  time.Time `json:"timestamp"`
+	BaseValue     int64     `json:"BaseValue"`
+	Bonus         int64     `json:"Bonus"`
+	Discovered    []string  `json:"Discovered"`
+	Systems       []string  `json:"Systems"`
+	TotalEarnings int64     `json:"TotalEarnings"`
+	Event         string    `json:"event"`
+	Timestamp     time.Time `json:"timestamp"`
 }
 
 func (e SellExplorationData) GetEvent() string {

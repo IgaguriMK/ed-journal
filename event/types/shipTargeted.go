@@ -12,6 +12,7 @@ func init() {
 }
 
 type ShipTargeted struct {
+	Faction            string    `json:"Faction"`
 	HullHealth         float64   `json:"HullHealth"`
 	LegalStatus        string    `json:"LegalStatus"`
 	PilotName          string    `json:"PilotName"`

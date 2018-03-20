@@ -12,6 +12,7 @@ func init() {
 }
 
 type Undocked struct {
+	MarketID    int64     `json:"MarketID"`
 	StationName string    `json:"StationName"`
 	StationType string    `json:"StationType"`
 	Event       string    `json:"event"`
