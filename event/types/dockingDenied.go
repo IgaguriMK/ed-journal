@@ -12,8 +12,10 @@ func init() {
 }
 
 type DockingDenied struct {
+	MarketID    int64     `json:"MarketID"`
 	Reason      string    `json:"Reason"`
 	StationName string    `json:"StationName"`
+	StationType string    `json:"StationType"`
 	Event       string    `json:"event"`
 	Timestamp   time.Time `json:"timestamp"`
 }

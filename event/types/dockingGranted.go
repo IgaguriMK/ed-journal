@@ -12,8 +12,10 @@ func init() {
 }
 
 type DockingGranted struct {
+	MarketID    int64     `json:"MarketID"`
 	LandingPad  int64     `json:"LandingPad"`
 	StationName string    `json:"StationName"`
+	StationType string    `json:"StationType"`
 	Event       string    `json:"event"`
 	Timestamp   time.Time `json:"timestamp"`
 }
