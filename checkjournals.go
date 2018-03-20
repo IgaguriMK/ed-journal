@@ -76,6 +76,7 @@ func main() {
 					unknownCount++
 					failed()
 				default:
+					saveFailRecord("parseError.", ".json", str+"\n")
 					log.Fatal("Parse error:", err)
 				}
 
