@@ -12,16 +12,18 @@ func init() {
 }
 
 type MarketSell struct {
-	AvgPricePaid int64     `json:"AvgPricePaid"`
-	BlackMarket  bool      `json:"BlackMarket"`
-	Count        int64     `json:"Count"`
-	IllegalGoods bool      `json:"IllegalGoods"`
-	SellPrice    int64     `json:"SellPrice"`
-	StolenGoods  bool      `json:"StolenGoods"`
-	TotalSale    int64     `json:"TotalSale"`
-	Type         string    `json:"Type"`
-	Event        string    `json:"event"`
-	Timestamp    time.Time `json:"timestamp"`
+	AvgPricePaid   int64     `json:"AvgPricePaid"`
+	BlackMarket    bool      `json:"BlackMarket"`
+	Count          int64     `json:"Count"`
+	IllegalGoods   bool      `json:"IllegalGoods"`
+	MarketID       int64     `json:"MarketID"`
+	SellPrice      int64     `json:"SellPrice"`
+	StolenGoods    bool      `json:"StolenGoods"`
+	TotalSale      int64     `json:"TotalSale"`
+	Type_Localised string    `json:"Type_Localised"`
+	Type           string    `json:"Type"`
+	Event          string    `json:"event"`
+	Timestamp      time.Time `json:"timestamp"`
 }
 
 func (e MarketSell) GetEvent() string {
