@@ -12,6 +12,7 @@ func init() {
 }
 
 type ModuleSell struct {
+	MarketID          int64     `json:"MarketID"`
 	SellItem          string    `json:"SellItem"`
 	SellItemLocalised string    `json:"SellItem_Localised"`
 	SellPrice         int64     `json:"SellPrice"`

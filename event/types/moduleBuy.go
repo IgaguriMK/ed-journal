@@ -15,6 +15,7 @@ type ModuleBuy struct {
 	BuyItem             string    `json:"BuyItem"`
 	BuyItemLocalised    string    `json:"BuyItem_Localised"`
 	BuyPrice            int64     `json:"BuyPrice"`
+	MarketID            int64     `json:"MarketID"`
 	SellItem            string    `json:"SellItem"`
 	SellItemLocalised   string    `json:"SellItem_Localised"`
 	SellPrice           int64     `json:"SellPrice"`
