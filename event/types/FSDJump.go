@@ -29,23 +29,25 @@ type FSDJump struct {
 			Trend int64  `json:"Trend"`
 		} `json:"RecoveringStates"`
 	} `json:"Factions"`
-	FuelLevel                 float64   `json:"FuelLevel"`
-	FuelUsed                  float64   `json:"FuelUsed"`
-	JumpDist                  float64   `json:"JumpDist"`
-	Population                int64     `json:"Population"`
-	StarPos                   []float64 `json:"StarPos"`
-	StarSystem                string    `json:"StarSystem"`
-	SystemAddress             int64     `json:"SystemAddress"`
-	SystemAllegiance          string    `json:"SystemAllegiance"`
-	SystemEconomy             string    `json:"SystemEconomy"`
-	SystemEconomyLocalised    string    `json:"SystemEconomy_Localised"`
-	SystemFaction             string    `json:"SystemFaction"`
-	SystemGovernment          string    `json:"SystemGovernment"`
-	SystemGovernmentLocalised string    `json:"SystemGovernment_Localised"`
-	SystemSecurity            string    `json:"SystemSecurity"`
-	SystemSecurityLocalised   string    `json:"SystemSecurity_Localised"`
-	Event                     string    `json:"event"`
-	Timestamp                 time.Time `json:"timestamp"`
+	FuelLevel                     float64   `json:"FuelLevel"`
+	FuelUsed                      float64   `json:"FuelUsed"`
+	JumpDist                      float64   `json:"JumpDist"`
+	Population                    int64     `json:"Population"`
+	StarPos                       []float64 `json:"StarPos"`
+	StarSystem                    string    `json:"StarSystem"`
+	SystemAddress                 int64     `json:"SystemAddress"`
+	SystemAllegiance              string    `json:"SystemAllegiance"`
+	SystemEconomy                 string    `json:"SystemEconomy"`
+	SystemEconomyLocalised        string    `json:"SystemEconomy_Localised"`
+	SystemFaction                 string    `json:"SystemFaction"`
+	SystemGovernment              string    `json:"SystemGovernment"`
+	SystemGovernmentLocalised     string    `json:"SystemGovernment_Localised"`
+	SystemSecondEconomy           string    `json:"SystemSecondEconomy"`
+	SystemSecondEconomy_Localised string    `json:"SystemSecondEconomy_Localised"`
+	SystemSecurity                string    `json:"SystemSecurity"`
+	SystemSecurityLocalised       string    `json:"SystemSecurity_Localised"`
+	Event                         string    `json:"event"`
+	Timestamp                     time.Time `json:"timestamp"`
 }
 
 func (e FSDJump) GetEvent() string {
