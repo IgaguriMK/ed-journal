@@ -176,8 +176,3 @@ func saveFailRecord(prefix, suffix, content string) {
 
 	fmt.Fprint(file, content)
 }
-
-type RawEvevtSaver struct {
-	file    *os.File
-	isFirst bool
-}
