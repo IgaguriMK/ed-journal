@@ -45,10 +45,10 @@ func JournalStream(filters ...EventFilter) (chan event.Event, error) {
 				if err != nil {
 					switch err := errors.Cause(err).(type) {
 					case *event.UnknownEventType:
-						//log.Println("Unknown event detected:", err)
+						log.Println("Unknown event detected:", err)
 						continue
 					default:
-						log.Fatal("JSON decode error:", err)
+						log.Println("JSON decode error:", err)
 					}
 				}
 				ch <- e
