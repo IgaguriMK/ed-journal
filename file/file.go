@@ -23,12 +23,12 @@ var journalExpr = regexp.MustCompile(`^Journal\.[0-9]{12}\.[0-9]{2}\.log$`)
 func JournalFiles(findPath string) ([]JournalFile, error) {
 	journals := make([]JournalFile, 0)
 
-	file, err := ioutil.ReadDir(findPath)
+	files, err := ioutil.ReadDir(findPath)
 	if err != nil {
 		return journals, fmt.Errorf("Can't open journal dir.\n    ", err)
 	}
 
-	for _, f := range file {
+	for _, f := range files {
 		if journalExpr.MatchString(f.Name()) {
 			jt, err := journalNameToTime(f.Name())
 			if err != nil {
