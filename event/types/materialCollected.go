@@ -12,11 +12,12 @@ func init() {
 }
 
 type MaterialCollected struct {
-	Category  string    `json:"Category"`
-	Count     int64     `json:"Count"`
-	Name      string    `json:"Name"`
-	Event     string    `json:"event"`
-	Timestamp time.Time `json:"timestamp"`
+	Category      string    `json:"Category"`
+	Count         int64     `json:"Count"`
+	Name          string    `json:"Name"`
+	NameLocalised string    `json:"Name_Localised"`
+	Event         string    `json:"event"`
+	Timestamp     time.Time `json:"timestamp"`
 }
 
 func (e MaterialCollected) GetEvent() string {

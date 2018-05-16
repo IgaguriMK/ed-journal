@@ -36,6 +36,8 @@ type Location struct {
 	Longitude                     float64   `json:"Longitude"`
 	MarketID                      int64     `json:"MarketID"`
 	Population                    int64     `json:"Population"`
+	PowerplayState                string    `json:"PowerplayState"`
+	Powers                        []string  `json:"Powers"`
 	StarPos                       []float64 `json:"StarPos"`
 	StarSystem                    string    `json:"StarSystem"`
 	StationName                   string    `json:"StationName"`

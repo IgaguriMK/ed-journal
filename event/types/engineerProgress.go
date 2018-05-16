@@ -12,11 +12,12 @@ func init() {
 }
 
 type EngineerProgress struct {
-	Engineer  string    `json:"Engineer"`
-	Progress  string    `json:"Progress"`
-	Rank      int64     `json:"Rank"`
-	Event     string    `json:"event"`
-	Timestamp time.Time `json:"timestamp"`
+	Engineer   string    `json:"Engineer"`
+	EngineerID int64     `json:"EngineerID"`
+	Progress   string    `json:"Progress"`
+	Rank       int64     `json:"Rank"`
+	Event      string    `json:"event"`
+	Timestamp  time.Time `json:"timestamp"`
 }
 
 func (e EngineerProgress) GetEvent() string {

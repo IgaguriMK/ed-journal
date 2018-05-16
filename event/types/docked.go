@@ -12,6 +12,7 @@ func init() {
 }
 
 type Docked struct {
+	CockpitBreach     bool    `json:"CockpitBreach"`
 	DistFromStarLS    float64 `json:"DistFromStarLS"`
 	FactionState      string  `json:"FactionState"`
 	MarketID          int64   `json:"MarketID"`

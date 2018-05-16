@@ -12,10 +12,11 @@ func init() {
 }
 
 type CollectCargo struct {
-	Stolen    bool      `json:"Stolen"`
-	Type      string    `json:"Type"`
-	Event     string    `json:"event"`
-	Timestamp time.Time `json:"timestamp"`
+	Stolen        bool      `json:"Stolen"`
+	Type          string    `json:"Type"`
+	TypeLocalised string    `json:"Type_Localised"`
+	Event         string    `json:"event"`
+	Timestamp     time.Time `json:"timestamp"`
 }
 
 func (e CollectCargo) GetEvent() string {

@@ -33,6 +33,8 @@ type FSDJump struct {
 	FuelUsed                      float64   `json:"FuelUsed"`
 	JumpDist                      float64   `json:"JumpDist"`
 	Population                    int64     `json:"Population"`
+	PowerplayState                string    `json:"PowerplayState"`
+	Powers                        []string  `json:"Powers"`
 	StarPos                       []float64 `json:"StarPos"`
 	StarSystem                    string    `json:"StarSystem"`
 	SystemAddress                 int64     `json:"SystemAddress"`
