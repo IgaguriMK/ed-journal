@@ -6,8 +6,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -17,8 +19,7 @@ import (
 	jfile "github.com/IgaguriMK/ed-journal/file"
 )
 
-const MaxFail = 1000
-
+var MaxFail = 1000
 var failCount = 0
 
 func main() {
@@ -43,8 +44,11 @@ func main() {
 		log.Fatal("Can't search journal files: ", err)
 	}
 
-	if err := os.RemoveAll("./_out"); err != nil {
-		log.Fatal("Can't remove dir: ", err)
+	if err := removeAllIn("./_out/unknown"); err != nil {
+		log.Fatal("Can't remove dir unknown: ", err)
+	}
+	if err := removeAllIn("./_out/mismatch"); err != nil {
+		log.Fatal("Can't remove dir mismatch: ", err)
 	}
 	if err := os.MkdirAll("./_out/unknown", 0644); err != nil {
 		log.Fatal("Can't create dir: ", err)
@@ -175,4 +179,21 @@ func saveFailRecord(prefix, suffix, content string) {
 	defer file.Close()
 
 	fmt.Fprint(file, content)
+}
+
+func removeAllIn(dir string) error {
+	files, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return err
+	}
+
+	for _, f := range files {
+		fname := filepath.Join(dir, f.Name())
+		err := os.Remove(fname)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
