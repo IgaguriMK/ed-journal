@@ -11,6 +11,9 @@ import (
 	"github.com/IgaguriMK/ed-journal/file"
 )
 
+var DumpUnknownError = false
+var DumpDecodeError = false
+
 func JournalStream(filters ...EventFilter) (chan event.Event, error) {
 	jd, err := file.JournalDir()
 	if err != nil {
@@ -30,6 +33,8 @@ func JournalStream(filters ...EventFilter) (chan event.Event, error) {
 	}
 
 	go func() {
+		lastHeader := ""
+
 		for _, jf := range jfs {
 			ch <- &FileStart{
 				start: jf.StartAt(),
@@ -41,16 +46,39 @@ func JournalStream(filters ...EventFilter) (chan event.Event, error) {
 			}
 
 			for sc.Scan() {
-				e, err := event.Parse(sc.Text())
+				str := sc.Text()
+				e, err := event.Parse(str)
 				if err != nil {
+
 					switch err := errors.Cause(err).(type) {
 					case *event.UnknownEventType:
-						log.Println("Unknown event detected:", err)
-						continue
+						if DumpUnknownError {
+							if lastHeader != "" {
+								log.Println("Joournal file: ", jf.Name())
+								log.Println("Header: ", lastHeader)
+								lastHeader = ""
+							}
+							log.Println("Unknown event detected:", err)
+							log.Println("\tWith line: ", str)
+						}
 					default:
-						log.Println("JSON decode error:", err)
+						if DumpDecodeError {
+							if lastHeader != "" {
+								log.Println("Joournal file: ", jf.Name())
+								log.Println("Header: ", lastHeader)
+								lastHeader = ""
+							}
+							log.Println("JSON decode error:", err)
+							log.Println("\tWith line: ", str)
+						}
 					}
+					continue
 				}
+
+				if e.GetEvent() == "Fileheader" {
+					lastHeader = str
+				}
+
 				ch <- e
 			}
 
