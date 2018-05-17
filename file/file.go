@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 	"time"
@@ -52,7 +53,7 @@ func JournalDir() (string, error) {
 	if jd == "" {
 		return "", errors.New("%USERPROFILE% is Empty")
 	}
-	return jd + `\Saved Games\Frontier Developments\Elite Dangerous`, nil
+	return filepath.Join(jd, `Saved Games\Frontier Developments\Elite Dangerous`), nil
 }
 
 const journalTime = "060102150405"
@@ -69,7 +70,7 @@ func (j *JournalFile) Name() string {
 }
 
 func (j *JournalFile) FullPath() string {
-	return j.dirPath + `\` + j.name
+	return filepath.Join(j.dirPath, j.name)
 }
 
 func (j *JournalFile) StartAt() time.Time {
