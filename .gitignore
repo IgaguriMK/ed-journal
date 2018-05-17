@@ -5,3 +5,5 @@ _journals/
 *.json
 *.txt
 *.log
+
+checkjournals
