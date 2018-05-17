@@ -21,7 +21,6 @@ import (
 )
 
 var MaxFail = 1000
-var failCount = 0
 
 func main() {
 	logfile, err := os.Create("error.log")
@@ -36,6 +35,8 @@ func main() {
 	////
 	var dir string
 	flag.StringVar(&dir, "d", "", "Check set dir.")
+	var autoFind bool
+	flag.BoolVar(&autoFind, "autofind", false, "Auto find default journal dir.")
 
 	flag.Parse()
 
@@ -52,19 +53,53 @@ func main() {
 		log.Fatal("Can't create dir: ", err)
 	}
 
-	jd, err := jfile.JournalDir()
-	if err != nil {
-		log.Fatal("Can't find journal dir: ", err)
+	jds := make([]string, 0)
+
+	if dir == "" || autoFind {
+		jd, err := jfile.JournalDir()
+		if err != nil {
+			log.Fatal("Can't find journal dir: ", err)
+		}
+		jds = append(jds, jd)
 	}
 
+	if dir != "" {
+		files, err := ioutil.ReadDir(dir)
+		if err != nil {
+			log.Fatal("Can't read dir: ", err)
+		}
+
+		for _, f := range files {
+			if f.IsDir() {
+				jds = append(jds, filepath.Join(dir, f.Name()))
+			}
+		}
+	}
+
+	c := new(Counter)
+
+	for _, jd := range jds {
+		c.Check(jd)
+	}
+
+	c.Summary()
+
+	if c.Failed() {
+		os.Exit(1)
+	}
+}
+
+type Counter struct {
+	totalCount    int
+	unknownCount  int
+	mismatchCount int
+}
+
+func (c *Counter) Check(jd string) {
 	jfs, err := jfile.JournalFiles(jd)
 	if err != nil {
 		log.Fatal("Can't search journal files: ", err)
 	}
-
-	totalCount := 0
-	unknownCount := 0
-	mismatchCount := 0
 
 	for _, jf := range jfs {
 		sc, err := jf.OpenScanner()
@@ -73,7 +108,7 @@ func main() {
 		}
 
 		for sc.Scan() {
-			totalCount++
+			c.total()
 
 			str := sc.Text()
 			e, err := event.Parse(str)
@@ -82,8 +117,7 @@ func main() {
 				switch err := errors.Cause(err).(type) {
 				case *event.UnknownEventType:
 					saveFailRecord("unknown/"+err.Type+".", ".json", err.Raw+"\n")
-					unknownCount++
-					failed()
+					c.unknown()
 				default:
 					saveFailRecord("parseError.", ".json", str+"\n")
 					log.Fatal("Parse error:", err)
@@ -94,28 +128,42 @@ func main() {
 
 			ok := checkLackOfField(str, e)
 			if !ok {
-				mismatchCount++
-				failed()
+				c.mismatch()
 			}
 		}
 
 		sc.Close()
 	}
+}
 
-	fmt.Printf("Unknown:    %d (%.2f %%)\n", unknownCount, 100.0*float64(unknownCount)/float64(totalCount))
-	fmt.Printf("Mismatches:    %d (%.2f %%)\n", mismatchCount, 100.0*float64(mismatchCount)/float64(totalCount))
+func (c *Counter) total() {
+	c.totalCount++
+}
 
-	if unknownCount > 0 || mismatchCount > 0 {
-		os.Exit(1)
+func (c *Counter) mismatch() {
+	c.mismatchCount++
+
+	if c.mismatchCount+c.unknownCount >= MaxFail {
+		log.Fatal("Too many fail.")
 	}
 }
 
-func failed() {
-	failCount++
+func (c *Counter) unknown() {
+	c.unknownCount++
 
-	if failCount >= MaxFail {
+	if c.mismatchCount+c.unknownCount >= MaxFail {
 		log.Fatal("Too many fail.")
 	}
+}
+
+func (c *Counter) Summary() {
+	fmt.Printf("Unknown:    %d (%.2f %%)\n", c.unknownCount, 100.0*float64(c.unknownCount)/float64(c.totalCount))
+	fmt.Printf("Mismatches:    %d (%.2f %%)\n", c.mismatchCount, 100.0*float64(c.mismatchCount)/float64(c.totalCount))
+	fmt.Printf("Total: %d\n", c.total)
+}
+
+func (c *Counter) Failed() bool {
+	return c.unknownCount > 0 || c.mismatchCount > 0
 }
 
 func checkLackOfField(eventStr string, e event.Event) bool {

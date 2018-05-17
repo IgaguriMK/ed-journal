@@ -1,12 +1,9 @@
-BASEPKG=github.com/IgaguriMK/ed-journal
-
-.PHONY: check
-check: build testrun
-
 .PHONY: build
 build:
 	go build checkjournals.go
 
-.PHONY: testrun
-testrun:
-	./checkjournals
+.PHONY: clean
+clean:
+	- rm *.exe
+	- rm checkjournals
+	- rm -r _out
