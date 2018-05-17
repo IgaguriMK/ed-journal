@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -33,6 +34,23 @@ func main() {
 	log.SetFlags(log.Lshortfile)
 
 	////
+	var dir string
+	flag.StringVar(&dir, "d", "", "Check set dir.")
+
+	flag.Parse()
+
+	if err := removeAllIn("./_out/unknown"); err != nil {
+		log.Println("Can't remove dir unknown: ", err)
+	}
+	if err := removeAllIn("./_out/mismatch"); err != nil {
+		log.Println("Can't remove dir mismatch: ", err)
+	}
+	if err := os.MkdirAll("./_out/unknown", 0744); err != nil {
+		log.Fatal("Can't create dir: ", err)
+	}
+	if err := os.MkdirAll("./_out/mismatch", 0744); err != nil {
+		log.Fatal("Can't create dir: ", err)
+	}
 
 	jd, err := jfile.JournalDir()
 	if err != nil {
@@ -42,19 +60,6 @@ func main() {
 	jfs, err := jfile.JournalFiles(jd)
 	if err != nil {
 		log.Fatal("Can't search journal files: ", err)
-	}
-
-	if err := removeAllIn("./_out/unknown"); err != nil {
-		log.Fatal("Can't remove dir unknown: ", err)
-	}
-	if err := removeAllIn("./_out/mismatch"); err != nil {
-		log.Fatal("Can't remove dir mismatch: ", err)
-	}
-	if err := os.MkdirAll("./_out/unknown", 0644); err != nil {
-		log.Fatal("Can't create dir: ", err)
-	}
-	if err := os.MkdirAll("./_out/mismatch", 0644); err != nil {
-		log.Fatal("Can't create dir: ", err)
 	}
 
 	totalCount := 0
