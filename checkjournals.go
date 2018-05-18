@@ -20,7 +20,7 @@ import (
 	jfile "github.com/IgaguriMK/ed-journal/file"
 )
 
-var MaxFail = 1000
+var MaxFail = 100000
 
 func main() {
 	logfile, err := os.Create("error.log")
