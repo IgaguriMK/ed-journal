@@ -20,7 +20,7 @@ import (
 	jfile "github.com/IgaguriMK/ed-journal/file"
 )
 
-var MaxFail = 100000
+var MaxFail int
 
 func main() {
 	logfile, err := os.Create("error.log")
@@ -37,6 +37,7 @@ func main() {
 	flag.StringVar(&dir, "d", "", "Check set dir.")
 	var autoFind bool
 	flag.BoolVar(&autoFind, "autofind", false, "Auto find default journal dir.")
+	flag.IntVar(&MaxFail, "maxfail", 100000, "Max fail count.")
 
 	flag.Parse()
 
